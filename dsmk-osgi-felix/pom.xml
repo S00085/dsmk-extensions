@@ -1,0 +1,63 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.dsmk</groupId>
+	<artifactId>dsmk-osgi-felix</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>DSMK OSGI Felix Subsystem</name>
+
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.dsmk</groupId>
+			<artifactId>dsmk-api</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.dsmk</groupId>
+			<artifactId>dsmk-kernel</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.felix/org.apache.felix.framework -->
+		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>org.apache.felix.main</artifactId>
+			<version>5.6.10</version>
+		</dependency>
+
+
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.6.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>java</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<!--executable>mvn</executable -->
+					<mainClass>org.dsmk.kernel.Main</mainClass>
+					<systemProperties>
+						<systemProperty>
+							<key>dsmk.ext.subsystem.count</key>
+							<value>1</value>
+						</systemProperty>
+						<systemProperty>
+							<key>dsmk.ext.subsystem.0.class</key>
+							<value>org.dsmk.subsys.osgi.FelixSubsystem</value>
+						</systemProperty>
+					</systemProperties>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
